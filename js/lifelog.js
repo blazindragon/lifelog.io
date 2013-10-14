@@ -10,6 +10,7 @@ app.config(function($routeProvider) {
     when('/signup', {controller:'SignupCtrl', templateUrl:'partials/signup.html'}).
     when('/edit_profile', {controller:'AccountCtrl', templateUrl:'partials/edit_profile.html'}).
     when('/change_password', {controller:'PasswordCtrl', templateUrl:'partials/change_password.html'}).
+    when('/about', {templateUrl:'partials/about.html'}).
     otherwise({redirectTo:'/'});
 });
 
