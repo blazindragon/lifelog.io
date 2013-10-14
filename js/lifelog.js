@@ -63,18 +63,19 @@ app.factory('EntryService', function($resource) {
 });
 
 app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
-            EntryService, AccountService) {
-    var dateFormat = 'dddd, MMMM D, YYYY';
+        EntryService, AccountService) {
     $scope.entriesByDay = {};
     $scope.entriesList = [];
 
     $scope.load = function($resource) {
-        var user = AccountService.get({}, function(success) {
-            $rootScope.user = user;
-            $rootScope.loggedIn = true;
-        }, function(error) {
-            $rootScope.loggedIn = false;
-        });
+        if(!$rootScope.loggedIn) {
+            var user = AccountService.get({}, function(success) {
+                $rootScope.user = user;
+                $rootScope.loggedIn = true;
+            }, function(error) {
+                $rootScope.loggedIn = false;
+            });
+        }
 
         var func = EntryService.query;
         var params = {};
