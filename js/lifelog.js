@@ -32,7 +32,10 @@ app.factory('AuthService', function($resource) {
 });
 
 app.controller('SigninCtrl', function($scope, $rootScope, $location, AuthService) {
-    $scope.user = {username:'', password:''};
+    $scope.user = {
+        username: '',
+        password: ''
+    };
 
     $scope.login = function() {
         $scope.user = AuthService.save($scope.user, function(success) {
