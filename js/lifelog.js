@@ -42,6 +42,7 @@ app.controller('SigninCtrl', function($scope, $rootScope, $location, AuthService
             $rootScope.logged_in = true;
             $location.path('/');
         }, function(error) {
+            $scope.errorMessage = error.data.error_message;
             $scope.signinError = true;
         });
     };
@@ -63,7 +64,7 @@ app.controller('SignupCtrl', function($scope, $rootScope, $location, AccountServ
             $location.path('/signin')
         }, function(error) {
             $scope.signupError = true;
-            $scope.errorMessage = error.error_message;
+            $scope.errorMessage = error.data.error_message;
         });
     };
 });

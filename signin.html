@@ -1,5 +1,5 @@
 <h3>Sign in</h3>
-<div class='alert alert-danger' ng-show='signinError'>Your username or password is incorrect. Please try again.</div>
+<div class='alert alert-danger' ng-show='signinError'>{{errorMessage}} Please try again.</div>
 <form class='form-horizontal' role='form' ng-submit='login()'>
     <div class='form-group'>
         <label class='col-lg-2 control-label' for='username'>Username</label>
