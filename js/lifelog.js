@@ -14,14 +14,6 @@ app.config(function($routeProvider) {
 app.config(function($httpProvider) {
     $httpProvider.interceptors.push(function($rootScope, $location, $q) {
         return {
-            'request': function(request) {
-                // if we're not logged-in to the AngularJS app, redirect to login page
-                if (!$rootScope.loggedIn && $location.path() != '/signin') {
-                    $location.path('/signin');
-                }
-
-                return request;
-            },
             'responseError': function(rejection) {
                 // if we're not logged-in to the web service, redirect to login page
                 if (rejection.status === 401 && $location.path() != '/signin') {
