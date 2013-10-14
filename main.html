@@ -41,7 +41,9 @@
             <ul class='list-group'>
                 <li class='list-group-item' ng-mouseenter='hoveringOnClose=true' ng-mouseleave='hoveringOnClose=false' ng-repeat='entry in entryList'>
                     {{ entry.content }}
-                    <span class='text-muted' ng-bind-html-unsafe='tag | splitTags' ng-repeat='tag in entry.tags'></span>
+                    <span class='text-muted' ng-repeat='tag in entry.tags'>
+                        #<span ng-repeat='(href, value) in tag | splitTag'><span ng-if='!$first'>/</span><a href='#/tag/{{ href }}'>{{ value }}</a></span>
+                    </span>
                     <button type='button' ng-show='hoveringOnClose' ng-click='deleteEntry()' class='close pull-right'>&times;</button>
                 </li>
             </ul>

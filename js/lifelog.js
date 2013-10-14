@@ -14,7 +14,7 @@ app.config(function($routeProvider) {
     otherwise({redirectTo:'/'});
 });
 
-app.filter('splitTags', function() {
+app.filter('splitTag', function() {
     return function(input) {
         if(!input) {
             return;
@@ -27,19 +27,15 @@ app.filter('splitTags', function() {
             return;
         }
 
-        var rendered = '#';
-        var prefix = '';
+        var output = {};
+        var key = '';
         for(var i = 0; i < elements.length; i++) {
-            if(i > 0) {
-                rendered += '/';
-            }
-
-            prefix += elements[i];
-            rendered += '<a href="#/tag/' + prefix + '">' + elements[i] + '</a>';
-            prefix += '/';
+            key += elements[i];
+            output[key] = elements[i];
+            key += '/';
         }
 
-        return rendered;
+        return output;
     }
 });
 
