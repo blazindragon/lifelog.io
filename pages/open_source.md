@@ -19,6 +19,9 @@ out.
 pull requests on [github][1]. We will be happy to accept your patch into the
 source code. If you do send in a patch for a particularly noteworthy feature,
 we'll also blog about it.
+- **Bug Reports**: filing bug reports is a great way to let us know what is
+broken. Bug reports are collected through the issue tracker on the [github][1]
+repository in question.
 - **Documentation**: the lifelog platform is in constant need of documentation.
 We have tried to provide as much documentation as we can, but feel free to add
 more. Documentation is submitted through pull requests on [github][1] on the
