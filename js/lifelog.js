@@ -40,6 +40,18 @@ app.filter('splitTag', function() {
     }
 });
 
+app.filter('sortEntries', function() {
+    return function(input) {
+        input.sort(function(left, right) {
+            var leftDate = moment.utc(left.day, app.dateFormat);
+            var rightDate = moment.utc(right.day, app.dateFormat);
+            return rightDate - leftDate;
+        });
+
+        return input;
+    }
+});
+
 app.factory('EntryService', function($resource) {
     return $resource('/api/entry/:id', {}, {
         query: {method:'GET', isArray:true},
@@ -97,7 +109,7 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
             return;
         }
 
-        var day = this.day;
+        var day = this.element.day;
         var content = this.newContent;
         this.newContent = '';
 
@@ -114,7 +126,7 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
     };
 
     $scope.editEntry = function($resource) {
-        var day = this.day;
+        var day = this.element.day;
         var entryId = this.entry.id;
 
         var entry = {
@@ -126,7 +138,6 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
             for(var i = 0; i < $scope.entriesByDay[day].length; i++) {
                 var cur = $scope.entriesByDay[day][i];
                 if(cur.id === entryId) {
-                    console.log(response);
                     $scope.entriesByDay[day][i] = response;
                 }
             }
@@ -136,7 +147,7 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
     };
 
     $scope.deleteEntry = function($resource) {
-        var day = this.day;
+        var day = this.element.day;
         var entryId = this.entry.id;
 
         EntryService.delete({id: entryId}, function(success) {
