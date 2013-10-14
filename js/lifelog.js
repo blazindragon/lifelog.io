@@ -13,6 +13,35 @@ app.config(function($routeProvider) {
     otherwise({redirectTo:'/'});
 });
 
+app.filter('splitTags', function() {
+    return function(input) {
+        if(!input) {
+            return;
+        }
+
+        var nohash = input.slice(1);
+        var elements = nohash.split('/');
+
+        if(!elements || elements.length == 0) {
+            return;
+        }
+
+        var rendered = '#';
+        var prefix = '';
+        for(var i = 0; i < elements.length; i++) {
+            if(i > 0) {
+                rendered += '/';
+            }
+
+            prefix += elements[i];
+            rendered += '<a href="#/tag/' + prefix + '">' + elements[i] + '</a>';
+            prefix += '/';
+        }
+
+        return rendered;
+    }
+});
+
 app.factory('EntryService', function($resource) {
     return $resource('/api/entry/:id', {}, {
         query: {method:'GET', params:{id:''}, isArray:true},
