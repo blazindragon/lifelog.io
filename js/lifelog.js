@@ -5,8 +5,8 @@ var app = angular.module('lifelog', ['ngResource']);
 app.config(function($routeProvider) {
     $routeProvider.
     when('/', {controller:'EventListCtrl', templateUrl:'entry_list.html'}).
-    when('/signin', {controller:'SigninCtrl', templateUrl:'signin.html'}).
-    when('/signout', {controller:'SignoutCtrl', templateUrl:'signout.html'}).
+    when('/signin', {controller:'AuthCtrl', templateUrl:'signin.html'}).
+    when('/signout', {controller:'AuthCtrl', templateUrl:'signout.html'}).
     when('/signup', {controller:'SignupCtrl', templateUrl:'signup.html'}).
     otherwise({redirectTo:'/'});
 });
@@ -31,7 +31,7 @@ app.factory('AuthService', function($resource) {
     return $resource('/api/session')
 });
 
-app.controller('SigninCtrl', function($scope, $rootScope, $location, AuthService) {
+app.controller('AuthCtrl', function($scope, $rootScope, $location, AuthService) {
     $scope.user = {
         username: '',
         password: ''
