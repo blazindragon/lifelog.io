@@ -66,7 +66,10 @@ app.controller('EntryCtrl', function($scope, EntryService) {
         });
     };
 
-    $scope.deleteEntry = function(entryId, day, $resource) {
+    $scope.deleteEntry = function($resource) {
+        var day = this.day;
+        var entryId = this.entry.id;
+
         EntryService.delete({id: entryId}, function(success) {
             for(var i = 0; i < $scope.entriesByDay[day].length; i++) {
                 if($scope.entriesByDay[day][i].id === entryId) {
