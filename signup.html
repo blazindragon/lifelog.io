@@ -1,0 +1,32 @@
+<h3>Sign up</h3>
+<p>Register for an account by filling out the form below.</p>
+<div class='alert alert-danger' ng-show='signupError'>{{errorMessage}} Please try again.</div>
+<form class='form-horizontal' role='form' ng-submit='signup()'>
+    <div class='form-group'>
+        <label class='col-lg-2 control-label' for='username'>Username</label>
+        <div class='col-lg-10'>
+            <input class='form-control' type='text' id='username' placeholder='username' ng-model='user.username'/>
+        </div>
+    </div>
+    <div class='form-group'>
+        <label class='col-lg-2 control-label' for='email'>Email Address</label>
+        <div class='col-lg-10'>
+            <input class='form-control' type='email' id='email' placeholder='email address' ng-model='user.email'/>
+        </div>
+    </div>
+    <div class='form-group'>
+        <label class='col-lg-2 control-label' for='password'>Password</label>
+        <div class='col-lg-10'>
+            <input type='password' class='form-control' id='password' placeholder='password' ng-model='user.password'/>
+        </div>
+    </div>
+    <div class='form-group'>
+        <label class='col-lg-2 control-label' for='password-repeat'>Repeat Password</label>
+        <div class='col-lg-10'>
+            <input type='password' class='form-control' id='password-repeat' placeholder='password'/>
+        </div>
+    </div>
+    <div class='col-lg-offset-2 col-lg-10'>
+        <button type='submit' class='btn btn-default'>Sign up</button>
+    </div>
+</form>
