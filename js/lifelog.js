@@ -39,7 +39,7 @@ app.controller('SigninCtrl', function($scope, $rootScope, $location, AuthService
 
     $scope.login = function() {
         $scope.user = AuthService.save($scope.user, function(success) {
-            $rootScope.logged_in = true;
+            $rootScope.loggedIn = true;
             $location.path('/');
         }, function(error) {
             $scope.errorMessage = error.data.error_message;
