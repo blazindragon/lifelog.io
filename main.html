@@ -8,13 +8,11 @@
     accomplishments, and progress through the various tasks that make up your day.
     It can help you answer questions like the one above.</p>
 
-    <p>You can get a preview of what it's like to lifelog using the
-    demonstration interface below. Keep in mind that changes won't be saved
-    until you sign in to your own account. You can get started micro-journaling
-    with lifelog by <a href='#/signup'>signing up</a>.</p>
+    <p>You can get started micro-journaling with lifelog by
+    <a href='#/signup'>signing up</a>.</p>
 </div>
 
-<div ng-init='load()'>
+<div ng-show='loggedIn' ng-init='load()'>
     <div class='col-md-4' ng-repeat='element in entriesList | sortEntries'>
         <div class='panel panel-primary'>
             <div class='panel-heading'>
