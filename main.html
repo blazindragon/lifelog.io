@@ -21,7 +21,7 @@
         <ol class='breadcrumb' >
             <span class='glyphicon glyphicon-tag'></span><span> Viewing tag: #</span>
             <li ng-repeat='(href, value) in tagFilter | splitTag'>
-                <a href='{{ href }}'>{{ value }}</a>
+                <a href='#/tag/{{ href }}'>{{ value }}</a>
             </li>
         </ol>
     </div>
