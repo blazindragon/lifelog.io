@@ -1,0 +1,33 @@
+<div ng-hide='loggedIn'>
+    <div class='page-header'>
+        <h1>Lifelog</h1>
+    </div>
+
+    <p>What were you doing two years ago on Thursday? Most people couldn't tell you
+    either. Lifelog is a micro-journaling application to help you track your life,
+    accomplishments, and progress through the various tasks that make up your day.
+    It can help you answer questions like the one above.</p>
+
+    <p>You can get started micro-journaling with lifelog by
+    <a href='#/signup'>creating an accont</a>.</p>
+</div>
+
+<div ng-show='loggedIn' ng-init='load()'>
+    <!--
+    <form class='form-horizontal' ng-submit='log_entry()'>
+        <div class='input-group'>
+            <span class='input-group-addon text-muted'>
+                <span class='glyphicon glyphicon-list-alt'></span>
+                What did you do today?
+            </span>
+            <input type='text' class='form-control col-lg-8'>
+            <span class='input-group-btn'>
+                <button type='submit' class='btn btn-success'>
+                    <span class='glyphicon glyphicon-ok-circle'></span>
+                    Log It
+                </button>
+            </span>
+        </div>
+    </form>
+    -->
+</div>
