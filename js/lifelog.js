@@ -1,5 +1,3 @@
-// lots of knowledge taken from https://github.com/crabasa/votr-part4
-
 var app = angular.module('lifelog', ['ngResource']);
 app.dateFormat = 'dddd, MMMM D, YYYY';
 
@@ -13,6 +11,18 @@ app.config(function($routeProvider) {
     when('/edit_profile', {controller:'AccountCtrl', templateUrl:'partials/edit_profile.html'}).
     when('/change_password', {controller:'PasswordCtrl', templateUrl:'partials/change_password.html'}).
     otherwise({redirectTo:'/'});
+});
+
+app.directive('markdown', function() {
+    var converter = new Showdown.converter();
+
+    return {
+        restrict: 'E',
+        link: function(scope, element, attrs) {
+            var html = converter.makeHtml(element.text());
+            element.html(html);
+        }
+    }
 });
 
 app.filter('splitTag', function() {
