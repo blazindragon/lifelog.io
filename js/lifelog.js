@@ -5,6 +5,7 @@ var app = angular.module('lifelog', ['ngResource']);
 app.config(function($routeProvider) {
     $routeProvider.
     when('/', {controller:'EntryCtrl', templateUrl:'main.html'}).
+    when('/tag/*tag', {controller:'EntryCtrl', templateUrl:'main.html'}).
     when('/signin', {controller:'AuthCtrl', templateUrl:'signin.html'}).
     when('/signout', {controller:'AuthCtrl', templateUrl:'signout.html'}).
     when('/signup', {controller:'SignupCtrl', templateUrl:'signup.html'}).
@@ -44,14 +45,16 @@ app.filter('splitTags', function() {
 
 app.factory('EntryService', function($resource) {
     return $resource('/api/entry/:id', {}, {
-        query: {method:'GET', params:{id:''}, isArray:true},
+        query: {method:'GET', isArray:true},
+        queryTag: {method: 'GET', params:{tag:'@tag'}, isArray:true},
         save: {method:'POST'},
         remove: {method:'DELETE'},
         update: {method:'PUT', params:{id:'@id'}}
     });
 });
 
-app.controller('EntryCtrl', function($scope, $rootScope, EntryService, AccountService) {
+app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
+            EntryService, AccountService) {
     var dateFormat = 'dddd, MMMM D, YYYY';
     $scope.entriesByDay = {};
 
@@ -63,10 +66,18 @@ app.controller('EntryCtrl', function($scope, $rootScope, EntryService, AccountSe
             $rootScope.loggedIn = false;
         });
 
+        var func = EntryService.query;
+        var params = {};
+        if($routeParams.tag) {
+            func = EntryService.queryTag;
+            params = {tag:$routeParams.tag};
+        }
+
+        // always have an entry box for today
         var today = moment().format(dateFormat);
         $scope.entriesByDay[today] = [];
 
-        var raw = EntryService.query({}, function(success) {
+        var raw = func(params, function(success) {
             for(var i = 0; i < raw.length; i++) {
                 var date = moment(raw[i].timestamp).format(dateFormat);
 
