@@ -1,3 +1,7 @@
+String.prototype.endsWith = function(suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
+
 var app = angular.module('lifelog', ['ngResource']);
 app.dateFormat = 'dddd, MMMM D, YYYY';
 
@@ -14,9 +18,21 @@ app.config(function($routeProvider) {
     otherwise({redirectTo:'/'});
 });
 
+app.config(function($httpProvider) {
     var converter = new Showdown.converter();
 
+    $httpProvider.interceptors.push(function($q) {
+        return {
+            'response': function(response) {
+                if(response.config.url.endsWith('.md')) {
+                    response.data = converter.makeHtml(response.data);
+                }
+
+                console.log(response);
+                return response;
+            }
         }
+    });
 });
 
 app.filter('splitTag', function() {
