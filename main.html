@@ -51,17 +51,17 @@
                 <li class='list-group-item' ng-mouseenter='hovering=true' ng-mouseleave='hovering=false' ng-dblclick='editing=true' ng-repeat='entry in element.entryList'>
                 <div ng-show='editing'>
                     <form ng-submit='editEntry(); editing=false'>
-                    <div class='input-group'>
-                        <input type='text' ng-model='entry.original_content' class='form-control input-sm' maxlength=140>
-                        <span class='input-group-btn'>
-                            <button class='btn btn-success input-sm' type='submit' ng-show='140 - entry.original_content.length > 20'>
-                                <span class='glyphicon glyphicon-check'></span>
-                            </button>
-                            <button class='btn btn-warning input-sm' type='submit' ng-show='140 - entry.original_content.length <= 20'>
-                                {{ 140 - entry.original_content.length }}
-                            </button>
-                        </span>
-                    </div>
+                        <div class='input-group'>
+                            <input type='text' ng-model='entry.original_content' class='form-control input-sm' maxlength=140>
+                            <span class='input-group-btn'>
+                                <button class='btn btn-success input-sm' type='submit' ng-show='140 - entry.original_content.length > 20'>
+                                    <span class='glyphicon glyphicon-check'></span>
+                                </button>
+                                <button class='btn btn-warning input-sm' type='submit' ng-show='140 - entry.original_content.length <= 20'>
+                                    {{ 140 - entry.original_content.length }}
+                                </button>
+                            </span>
+                        </div>
                     </form>
                 </div>
                 <div ng-hide='editing'>
