@@ -23,13 +23,55 @@ app.factory('EntryService', function($resource) {
 });
 
 app.controller('EntryCtrl', function($scope, EntryService) {
-    $scope.entries = {};
+    var dateFormat = 'dddd, MMMM D, YYYY';
+    $scope.entriesByDay = {};
 
     $scope.load = function($resource) {
-        var raw_entries = EntryService.get();
-        for(var i = 0; i < raw_entries.length; i++) {
+        var today = moment().format(dateFormat);
+        $scope.entriesByDay[today] = [];
 
+        var raw = EntryService.query({}, function(success) {
+            for(var i = 0; i < raw.length; i++) {
+                var date = moment(raw[i].timestamp).format(dateFormat);
+
+                if(!(date in $scope.entriesByDay)) {
+                    $scope.entriesByDay[date] = [];
+                }
+
+                $scope.entriesByDay[date].push(raw[i]);
+            }
+        }, function(error) {
+            // TODO(fsareshwala): fill me in
+        });
+    };
+
+    $scope.addEntry = function(day, content, $resource) {
+        if(!content) {
+            return;
         }
+
+        var entry = {
+            content: content,
+            timestamp: moment.utc(day, dateFormat)
+        };
+
+        var response = EntryService.save(entry, function(success) {
+            $scope.entriesByDay[day].push(response);
+        }, function(error) {
+            // TODO(fsareshwala): fill me in
+        });
+    };
+
+    $scope.deleteEntry = function(entryId, day, $resource) {
+        EntryService.delete({id: entryId}, function(success) {
+            for(var i = 0; i < $scope.entriesByDay[day].length; i++) {
+                if($scope.entriesByDay[day][i].id === entryId) {
+                    $scope.entriesByDay[day].splice(i, 1);
+                }
+            }
+        }, function(error) {
+            // TODO(fsareshwala): fill me in
+        });
     };
 });
 
