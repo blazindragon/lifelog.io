@@ -54,6 +54,7 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
             EntryService, AccountService) {
     var dateFormat = 'dddd, MMMM D, YYYY';
     $scope.entriesByDay = {};
+    $scope.entriesList = [];
 
     $scope.load = function($resource) {
         var user = AccountService.get({}, function(success) {
@@ -73,6 +74,7 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
         // always have an entry box for today
         var today = moment().format(app.dateFormat);
         $scope.entriesByDay[today] = [];
+        $scope.entriesList.push({day: today, entryList: $scope.entriesByDay[today]});
 
         var raw = func(params, function(success) {
             for(var i = 0; i < raw.length; i++) {
@@ -80,6 +82,7 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
 
                 if(!(date in $scope.entriesByDay)) {
                     $scope.entriesByDay[date] = [];
+                    $scope.entriesList.push({day: date, entryList: $scope.entriesByDay[date]});
                 }
 
                 $scope.entriesByDay[date].push(raw[i]);
