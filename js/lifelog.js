@@ -4,7 +4,7 @@ var app = angular.module('lifelog', ['ngResource']);
 
 app.config(function($routeProvider) {
     $routeProvider.
-    when('/', {controller:'EventListCtrl', templateUrl:'entry_list.html'}).
+    when('/', {templateUrl:'entry_list.html'}).
     when('/signin', {controller:'AuthCtrl', templateUrl:'signin.html'}).
     when('/signout', {controller:'AuthCtrl', templateUrl:'signout.html'}).
     when('/signup', {controller:'SignupCtrl', templateUrl:'signup.html'}).
