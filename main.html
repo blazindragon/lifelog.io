@@ -29,7 +29,10 @@
 
     <span class='col-md-4' ng-repeat='(day, entryList) in entriesByDay'>
         <div class='panel panel-primary'>
-            <div class='panel-heading'>{{ day }}</div>
+            <div class='panel-heading'>
+                <span class='glyphicon glyphicon-calendar'></span>
+                {{ day }}
+            </div>
             <div class='panel-body'>
                 <form class='form-horizontal' ng-submit='addEntry()'>
                     <input type='text' placeholder='What did you do on {{ day }}?' ng-model='content' class='form-control input-sm'>
