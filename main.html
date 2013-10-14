@@ -17,6 +17,15 @@
 </div>
 
 <div ng-show='loggedIn' ng-init='load()'>
+    <div ng-show='viewingTag'>
+        <ol class='breadcrumb' >
+            <span class='glyphicon glyphicon-tag'></span><span> Viewing tag: #</span>
+            <li ng-repeat='(href, value) in tagFilter | splitTag'>
+                <a href='{{ href }}'>{{ value }}</a>
+            </li>
+        </ol>
+    </div>
+
     <div class='col-md-4' ng-repeat='element in entriesList | sortEntries'>
         <div class='panel panel-primary'>
             <div class='panel-heading'>

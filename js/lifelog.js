@@ -54,9 +54,11 @@ app.filter('splitTag', function() {
             return;
         }
 
-        var nohash = input.slice(1);
-        var elements = nohash.split('/');
+        if(input[0] === '#') {
+            input = input.slice(1);
+        }
 
+        var elements = input.split('/');
         if(!elements || elements.length == 0) {
             return;
         }
@@ -113,8 +115,15 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
         var func = EntryService.query;
         var params = {};
         if($routeParams.tag) {
+            $scope.viewingTag = true;
+            $scope.tagFilter = $routeParams.tag;
+
             func = EntryService.queryTag;
             params = {tag:$routeParams.tag};
+        }
+        else {
+            $scope.viewingTag = false;
+            $scope.tagFilter = '';
         }
 
         // always have an entry box for today
