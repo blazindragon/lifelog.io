@@ -16,6 +16,7 @@ app.config(function($routeProvider) {
     when('/change_password', {controller:'PasswordCtrl', templateUrl:'partials/change_password.html'}).
     when('/about', {templateUrl:'partials/about.html'}).
     when('/privacy_policy', {templateUrl:'pages/privacy_policy.md'}).
+    when('/applications', {templateUrl:'applications.html'}).
     when('/faq', {templateUrl:'pages/faq.md'}).
     otherwise({redirectTo:'/'});
 });
