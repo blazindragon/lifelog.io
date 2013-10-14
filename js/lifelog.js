@@ -75,7 +75,7 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
 
         var raw = func(params, function(success) {
             for(var i = 0; i < raw.length; i++) {
-                var date = moment(raw[i].timestamp).format(dateFormat);
+                var date = moment.utc(raw[i].timestamp).format(dateFormat);
 
                 if(!(date in $scope.entriesByDay)) {
                     $scope.entriesByDay[date] = [];
