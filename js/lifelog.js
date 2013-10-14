@@ -47,3 +47,23 @@ app.controller('SigninCtrl', function($scope, $rootScope, $location, AuthService
     };
 });
 
+app.factory('AccountService', function($resource) {
+    return $resource('/api/signup')
+});
+
+app.controller('SignupCtrl', function($scope, $rootScope, $location, AccountService) {
+    $scope.user = {
+        username: '',
+        email: '',
+        password: ''
+    };
+
+    $scope.signup = function() {
+        $scope.user = AccountService.save($scope.user, function(success) {
+            $location.path('/signin')
+        }, function(error) {
+            $scope.signupError = true;
+            $scope.errorMessage = error.error_message;
+        });
+    };
+});
