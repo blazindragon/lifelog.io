@@ -28,7 +28,7 @@ app.config(function($httpProvider) {
 });
 
 app.factory('AuthService', function($resource) {
-    return $resource('//api.lifelog.io/session')
+    return $resource('/api/session')
 });
 
 app.controller('SigninCtrl', function($scope, $rootScope, $location, AuthService) {
