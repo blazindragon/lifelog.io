@@ -1,6 +1,7 @@
 // lots of knowledge taken from https://github.com/crabasa/votr-part4
 
 var app = angular.module('lifelog', ['ngResource']);
+app.dateFormat = 'dddd, MMMM D, YYYY';
 
 app.config(function($routeProvider) {
     $routeProvider.
@@ -70,12 +71,12 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
         }
 
         // always have an entry box for today
-        var today = moment().format(dateFormat);
+        var today = moment().format(app.dateFormat);
         $scope.entriesByDay[today] = [];
 
         var raw = func(params, function(success) {
             for(var i = 0; i < raw.length; i++) {
-                var date = moment.utc(raw[i].timestamp).format(dateFormat);
+                var date = moment.utc(raw[i].timestamp).format(app.dateFormat);
 
                 if(!(date in $scope.entriesByDay)) {
                     $scope.entriesByDay[date] = [];
@@ -99,7 +100,7 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
 
         var entry = {
             content: content,
-            timestamp: moment.utc(day, dateFormat)
+            timestamp: moment.utc(day, app.dateFormat)
         };
 
         var response = EntryService.save(entry, function(success) {
