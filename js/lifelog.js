@@ -109,6 +109,28 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
         });
     };
 
+    $scope.editEntry = function($resource) {
+        var day = this.day;
+        var entryId = this.entry.id;
+
+        var entry = {
+            id: this.entry.id,
+            content: this.entry.original_content
+        };
+
+        var response = EntryService.update(entry, function(success) {
+            for(var i = 0; i < $scope.entriesByDay[day].length; i++) {
+                var cur = $scope.entriesByDay[day][i];
+                if(cur.id === entryId) {
+                    console.log(response);
+                    $scope.entriesByDay[day][i] = response;
+                }
+            }
+        }, function(error) {
+            // TODO(fsareshwala): fill me in
+        });
+    };
+
     $scope.deleteEntry = function($resource) {
         var day = this.day;
         var entryId = this.entry.id;
