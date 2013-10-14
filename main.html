@@ -39,18 +39,17 @@
             </div>
             <ul class='list-group'>
                 <li class='list-group-item' ng-mouseenter='hovering=true' ng-mouseleave='hovering=false' ng-dblclick='editing=true' ng-repeat='entry in element.entryList'>
-                    <div ng-show='editing'>
-                        <form ng-submit='editEntry(); editing=false'>
-                            <input type='text' ng-model='entry.original_content' class='form-control input-sm'>
-                        </form>
-                    </div>
-                    <div ng-hide='editing'>
-                        <span>{{ entry.content }}</span>
-                        <span class='text-muted' ng-repeat='tag in entry.tags'>
-                            #<span ng-repeat='(href, value) in tag | splitTag'><span ng-if='!$first'>/</span><a href='#/tag/{{ href }}'>{{ value }}</a></span>
-                        </span>
-                        <button type='button' ng-show='hovering' ng-click='deleteEntry()' class='close pull-right'>&times;</button>
-                    </div>
+                <div ng-show='editing'>
+                    <form ng-submit='editEntry(); editing=false'>
+                        <input type='text' ng-model='entry.original_content' class='form-control input-sm'>
+                    </form>
+                </div>
+                <div ng-hide='editing'>
+                    <span>{{ entry.content }}</span>
+                    <span class='label' ng-repeat='tag in entry.tags'><span class='text-primary'>#</span><span ng-repeat='(href, value) in tag | splitTag'><span class='text-primary' ng-if='!$first'>/</span><a href='#/tag/{{ href }}'>{{ value }}</a></span>
+                    </span>
+                    <button type='button' ng-show='hovering' ng-click='deleteEntry()' class='close pull-right'>&times;</button>
+                </div>
                 </li>
             </ul>
         </div>
