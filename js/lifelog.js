@@ -15,9 +15,13 @@ app.config(function($routeProvider) {
     when('/edit_profile', {controller:'AccountCtrl', templateUrl:'partials/edit_profile.html'}).
     when('/change_password', {controller:'PasswordCtrl', templateUrl:'partials/change_password.html'}).
     when('/about', {templateUrl:'partials/about.html'}).
-    when('/privacy_policy', {templateUrl:'pages/privacy_policy.md'}).
+
+    when('/api_documentation', {templateUrl:'pages/api_documentation.md'}).
     when('/applications', {templateUrl:'applications.html'}).
     when('/faq', {templateUrl:'pages/faq.md'}).
+    when('/open_source', {templateUrl:'pages/open_source.md'}).
+    when('/privacy_policy', {templateUrl:'pages/privacy_policy.md'}).
+
     otherwise({redirectTo:'/'});
 });
 
