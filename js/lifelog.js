@@ -115,7 +115,8 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
 
         EntryService.delete({id: entryId}, function(success) {
             for(var i = 0; i < $scope.entriesByDay[day].length; i++) {
-                if($scope.entriesByDay[day][i].id === entryId) {
+                var cur = $scope.entriesByDay[day][i];
+                if(cur.id === entryId) {
                     $scope.entriesByDay[day].splice(i, 1);
                 }
             }
