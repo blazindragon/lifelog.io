@@ -7,11 +7,11 @@ app.config(function($routeProvider) {
     $routeProvider.
     when('/', {controller:'EntryCtrl', templateUrl:'main.html'}).
     when('/tag/*tag', {controller:'EntryCtrl', templateUrl:'main.html'}).
-    when('/signin', {controller:'AuthCtrl', templateUrl:'signin.html'}).
-    when('/signout', {controller:'AuthCtrl', templateUrl:'signout.html'}).
-    when('/signup', {controller:'SignupCtrl', templateUrl:'signup.html'}).
-    when('/edit_profile', {controller:'AccountCtrl', templateUrl:'edit_profile.html'}).
-    when('/change_password', {controller:'PasswordCtrl', templateUrl:'change_password.html'}).
+    when('/signin', {controller:'AuthCtrl', templateUrl:'partials/signin.html'}).
+    when('/signout', {controller:'AuthCtrl', templateUrl:'partials/signout.html'}).
+    when('/signup', {controller:'SignupCtrl', templateUrl:'partials/signup.html'}).
+    when('/edit_profile', {controller:'AccountCtrl', templateUrl:'partials/edit_profile.html'}).
+    when('/change_password', {controller:'PasswordCtrl', templateUrl:'partials/change_password.html'}).
     otherwise({redirectTo:'/'});
 });
 
