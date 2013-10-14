@@ -20,7 +20,7 @@
                 </div>
                 <div class='navbar-collapse collapse'>
                     <ul class='nav navbar-nav' ng-show='loggedIn'>
-                        <li><a href='#'><span class="glyphicon glyphicon-book"></span> Home</a></li>
+                        <li><a href='#'><span class='glyphicon glyphicon-book'></span> Home</a></li>
                     </ul>
                     <ul class='nav navbar-nav navbar-right' ng-hide='loggedIn'>
                         <li><a href='#/signin'>Sign in</a></li>
@@ -28,12 +28,12 @@
                     </ul>
                     <ul class='nav navbar-nav navbar-right' ng-show='loggedIn'>
                         <li class='dropdown'>
-                            <a href='#' class='dropdown-toggle' data-toggle='dropdown'><span class="glyphicon glyphicon-user"></span> {{ user.username }} <span class='caret'></span></a>
+                            <a href='#' class='dropdown-toggle' data-toggle='dropdown'><span class='glyphicon glyphicon-user'></span> {{ user.username }} <span class='caret'></span></a>
                             <ul class='dropdown-menu'>
-                                <li><a href='#/edit_profile'><span class="glyphicon glyphicon-edit"></span> Edit Profile</a></li>
-                                <li><a href='#/change_password'><span class="glyphicon glyphicon-lock"></span> Change Password</a></li>
+                                <li><a href='#/edit_profile'><span class='glyphicon glyphicon-edit'></span> Edit Profile</a></li>
+                                <li><a href='#/change_password'><span class='glyphicon glyphicon-lock'></span> Change Password</a></li>
                                 <li class='divider'></li>
-                                <li><a href='#/signout'><span class="glyphicon glyphicon-road"></span> Sign Out</a></li>
+                                <li><a href='#/signout'><span class='glyphicon glyphicon-road'></span> Sign Out</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -60,6 +60,7 @@
         <script src='//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js' /></script>
         <script src='//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js'></script>
         <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js'></script>
+        <script src='/js/moment.min.js'></script>
         <script src='/js/lifelog.js'></script>
         <script src='/js/angular-resource.min.js'></script>
     </body>
