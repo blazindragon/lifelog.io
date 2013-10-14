@@ -1,3 +1,6 @@
+Privacy Policy
+================================================================================
+
 This Privacy Policy governs the manner in which Tektonic, LLC collects, uses,
 maintains and discloses information collected from users (each, a "User") of
 the http://www.lifelog.io website ("Site"). This privacy policy applies to the
