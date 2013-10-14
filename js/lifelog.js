@@ -89,13 +89,13 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
     };
 
     $scope.addEntry = function($resource) {
-        if(!this.content) {
+        if(!this.newContent) {
             return;
         }
 
         var day = this.day;
-        var content = this.content;
-        this.content = '';
+        var content = this.newContent;
+        this.newContent = '';
 
         var entry = {
             content: content,
