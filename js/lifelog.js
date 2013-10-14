@@ -42,7 +42,7 @@ app.controller('SigninCtrl', function($scope, $rootScope, $location, AuthService
             $rootScope.logged_in = true;
             $location.path('/');
         }, function(error) {
-            $scope.loginError = true;
+            $scope.signinError = true;
         });
     };
 });
