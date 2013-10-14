@@ -46,6 +46,15 @@ app.controller('AuthCtrl', function($scope, $rootScope, $location, AuthService) 
             $scope.signinError = true;
         });
     };
+
+    $scope.logout = function() {
+        $scope.user = AuthService.delete($scope.user, function(success) {
+            $rootScope.loggedIn = false;
+        }, function(error) {
+            $scope.signoutError = true;
+            $scope.errorMessage = error.data.error_message;
+        });
+    }
 });
 
 app.factory('AccountService', function($resource) {
