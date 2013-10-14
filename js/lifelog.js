@@ -92,7 +92,7 @@ app.factory('EntryService', function($resource) {
         query: {method:'GET', isArray:true},
         queryTag: {method: 'GET', params:{tag:'@tag'}, isArray:true},
         save: {method:'POST'},
-        remove: {method:'DELETE'},
+        delete: {method:'DELETE'},
         update: {method:'PUT', params:{id:'@id'}}
     });
 });
