@@ -4,7 +4,7 @@ var app = angular.module('lifelog', ['ngResource']);
 
 app.config(function($routeProvider) {
     $routeProvider.
-    when('/', {controller:'EventListCtrl', templateUrl:'entry-list.html'}).
+    when('/', {controller:'EventListCtrl', templateUrl:'entry_list.html'}).
     when('/signin', {controller:'SigninCtrl', templateUrl:'signin.html'}).
     when('/signup', {controller:'SignupCtrl', templateUrl:'signup.html'}).
     otherwise({redirectTo:'/'});
