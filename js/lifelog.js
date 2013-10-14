@@ -51,11 +51,18 @@ app.factory('EntryService', function($resource) {
     });
 });
 
-app.controller('EntryCtrl', function($scope, EntryService) {
+app.controller('EntryCtrl', function($scope, $rootScope, EntryService, AccountService) {
     var dateFormat = 'dddd, MMMM D, YYYY';
     $scope.entriesByDay = {};
 
     $scope.load = function($resource) {
+        var user = AccountService.get({}, function(success) {
+            $rootScope.user = user;
+            $rootScope.loggedIn = true;
+        }, function(error) {
+            $rootScope.loggedIn = false;
+        });
+
         var today = moment().format(dateFormat);
         $scope.entriesByDay[today] = [];
 
