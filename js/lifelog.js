@@ -45,10 +45,14 @@ app.controller('EntryCtrl', function($scope, EntryService) {
         });
     };
 
-    $scope.addEntry = function(day, content, $resource) {
-        if(!content) {
+    $scope.addEntry = function($resource) {
+        if(!this.content) {
             return;
         }
+
+        var day = this.day;
+        var content = this.content;
+        this.content = '';
 
         var entry = {
             content: content,
