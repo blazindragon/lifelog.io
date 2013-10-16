@@ -166,7 +166,7 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
 
         var entry = {
             content: content,
-            timestamp: moment.utc(day, app.dateFormat)
+            timestamp: moment(day, app.dateFormat)
         };
 
         var response = EntryService.save(entry, function(success) {
