@@ -13,7 +13,7 @@ app.config(function($routeProvider) {
     when('/signout', {controller:'AuthCtrl', templateUrl:'partials/signout.html'}).
     when('/signup', {controller:'SignupCtrl', templateUrl:'partials/signup.html'}).
     when('/edit_profile', {controller:'AccountCtrl', templateUrl:'partials/edit_profile.html'}).
-    when('/change_password', {controller:'PasswordCtrl', templateUrl:'partials/change_password.html'}).
+    when('/user/password', {controller:'PasswordCtrl', templateUrl:'partials/change_password.html'}).
     when('/about', {templateUrl:'partials/about.html'}).
 
     when('/api_documentation', {templateUrl:'pages/api_documentation.md'}).
@@ -274,7 +274,7 @@ app.controller('AccountCtrl', function($scope, AccountService) {
 });
 
 app.factory('PasswordService', function($resource) {
-    return $resource('/api/change_password');
+    return $resource('/api/user/password');
 });
 
 app.controller('PasswordCtrl', function($scope, PasswordService) {
