@@ -46,8 +46,8 @@ Specifically, the lifelog platform is comprised of the following components:
 The frontend and backend have been purposefully separated. This allows the
 backend to not know, nor care about, anything frontend related; the backend
 remains purely an api provider. Any external system which implements that api
-can now interface with the backend just. The frontend must implement the same
-api that a command line client or a mobile application would.
+can now interface with the backend. The frontend must implement the same api
+that a command line client or a mobile application would.
 
 A separation may seem counter-intuitive at first. After all, projects like
 [Django](https://www.djangoproject.com) and
