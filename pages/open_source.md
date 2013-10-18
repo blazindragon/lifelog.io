@@ -58,8 +58,7 @@ has access to every feature through the same methods that the web frontend uses.
 A separation is closer to the unix philosophy and has massive implications on
 productivity, correctness, and maintainability of the software in question.
 
-[lifelogd][2] Backend
---------------------------------------------------------------------------------
+### [lifelogd][2] Backend
 The lifelogd backend is a small FastCGI backend which serves a simple [REST][4]
 json api to uesrs. It is written in [go](http://www.golang.org) for the many
 benefits it provides:
@@ -83,8 +82,7 @@ the core web server down
 - FastCGI daemons can run anywhere in the network, e.g. on separate a machine
 - Many web servers, e.g. lighttpd or nginx, have built in FastCGI load balancing
 
-[lifelog.io][3] Web Frontend
---------------------------------------------------------------------------------
+### [lifelog.io][3] Web Frontend
 The lifelog.io web frontend is a consumer of the lifelogd backend api. It is
 written in Javascript using [AngularJs](http://www.angularjs.org). As the
 AngularJs homepage states, "HTML is great for declaring static documents, but it
