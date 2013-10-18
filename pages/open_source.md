@@ -80,7 +80,7 @@ can focus on being HTTP compliant. Plus, it will be much more efficient at
 serving files than the lifelogd backend can ever hope to be.
 - Isolation from the core web server; bugs in the lifelogd backend cannot bring
 the core web server down
-- FastCGI daemons can run anywhere within the network, e.g on separate a machine
+- FastCGI daemons can run anywhere in the network, e.g. on separate a machine
 - Many web servers, e.g. lighttpd or nginx, have built in FastCGI load balancing
 
 [lifelog.io][3] Web Frontend
