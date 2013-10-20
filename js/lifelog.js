@@ -104,8 +104,56 @@ app.factory('EntryService', function($resource) {
 
 app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
         EntryService, AccountService) {
-    $scope.entriesByDay = {};
-    $scope.entriesList = [];
+    $scope.entryCollection = {
+        entriesByDay: {},
+        entriesList: [],
+
+        insert: function(entry) {
+            var day = moment.utc(entry.timestamp).local().format(app.dateFormat);
+
+            if(!(day in this.entriesByDay)) {
+                this.entriesByDay[day] = [];
+                this.entriesList.push({day: day, entryList: this.entriesByDay[day]});
+            }
+
+            this.entriesByDay[day].push(entry);
+        },
+
+        remove: function(entryId) {
+            var days = Object.keys(this.entriesByDay);
+
+            for(var i = 0; i < days.length; i++) {
+                var day = days[i];
+
+                for(var j = 0; j < this.entriesByDay[day].length; j++) {
+                    var current_entry = this.entriesByDay[day][j];
+                    if(current_entry.id == entryId) {
+                        this.entriesByDay[day].splice(i, 1);
+                    }
+                }
+            }
+        },
+
+        update: function(entryId, entry) {
+            var days = Object.keys(this.entriesByDay);
+
+            for(var i = 0; i < days.length; i++) {
+                var day = days[i];
+
+                for(var j = 0; j < this.entriesByDay[day].length; j++) {
+                    var current_entry = this.entriesByDay[day][j];
+                    if(current_entry.id == entryId) {
+                        this.entriesByDay[day][j] = entry;
+                    }
+                }
+            }
+        }
+    };
+
+    // always have an entry box for today
+    var today = moment().format(app.dateFormat);
+    $scope.entryCollection.entriesByDay[today] = [];
+    $scope.entryCollection.entriesList.push({day: today, entryList: $scope.entryCollection.entriesByDay[today]});
 
     $scope.load = function($resource) {
         if(!$rootScope.loggedIn) {
@@ -131,21 +179,9 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
             $scope.tagFilter = '';
         }
 
-        // always have an entry box for today
-        var today = moment().format(app.dateFormat);
-        $scope.entriesByDay[today] = [];
-        $scope.entriesList.push({day: today, entryList: $scope.entriesByDay[today]});
-
         var raw = func(params, function(success) {
             for(var i = 0; i < raw.length; i++) {
-                var date = moment.utc(raw[i].timestamp).local().format(app.dateFormat);
-
-                if(!(date in $scope.entriesByDay)) {
-                    $scope.entriesByDay[date] = [];
-                    $scope.entriesList.push({day: date, entryList: $scope.entriesByDay[date]});
-                }
-
-                $scope.entriesByDay[date].push(raw[i]);
+                $scope.entryCollection.insert(raw[i]);
             }
         }, function(error) {
             // TODO(fsareshwala): fill me in
@@ -167,7 +203,7 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
         };
 
         var response = EntryService.save(entry, function(success) {
-            $scope.entriesByDay[day].push(response);
+            $scope.entryCollection.insert(response);
         }, function(error) {
             // TODO(fsareshwala): fill me in
         });
@@ -183,28 +219,17 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
         };
 
         var response = EntryService.update(entry, function(success) {
-            for(var i = 0; i < $scope.entriesByDay[day].length; i++) {
-                var cur = $scope.entriesByDay[day][i];
-                if(cur.id === entryId) {
-                    $scope.entriesByDay[day][i] = response;
-                }
-            }
+            $scope.entryCollection.update(entryId, response);
         }, function(error) {
             // TODO(fsareshwala): fill me in
         });
     };
 
     $scope.deleteEntry = function($resource) {
-        var day = this.element.day;
         var entryId = this.entry.id;
 
         EntryService.delete({id: entryId}, function(success) {
-            for(var i = 0; i < $scope.entriesByDay[day].length; i++) {
-                var cur = $scope.entriesByDay[day][i];
-                if(cur.id === entryId) {
-                    $scope.entriesByDay[day].splice(i, 1);
-                }
-            }
+            $scope.entryCollection.remove(entryId);
         }, function(error) {
             // TODO(fsareshwala): fill me in
         });
