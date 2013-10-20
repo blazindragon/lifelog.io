@@ -260,8 +260,9 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
     };
 
     $scope.deleteEntry = function($resource) {
-        EntryService.delete({id: this.entry.id}, function(success) {
-            $scope.entryCollection.remove(this.entry);
+        var entry = this.entry;
+        EntryService.delete({id: entry.id}, function(success) {
+            $scope.entryCollection.remove(entry);
         }, function(error) {
             // TODO(fsareshwala): fill me in
         });
