@@ -118,37 +118,67 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
             }
 
             this.entriesByDay[day].push(entry);
+            this._addEntryTags(entry);
+        },
 
+        _addEntryTags: function(entry) {
             for(var i = 0; i < entry.tags.length; i++) {
-                // angularjs doesn't allow duplicates in repeaters
-                this.allTags[entry.tags[i]] = entry.tags[i];
+                var tag = entry.tags[i];
+
+                if(tag.length == 0) {
+                    continue;
+                }
+
+                if(!(tag in this.allTags)) {
+                    this.allTags[tag] = {tag: tag, count: 0};
+                }
+
+                // track the number of entries each tag has associated with it
+                this.allTags[tag].count++;
             }
         },
 
-        remove: function(entryId) {
-            var days = Object.keys(this.entriesByDay);
-            for(var i = 0; i < days.length; i++) {
-                var day = days[i];
-                for(var j = 0; j < this.entriesByDay[day].length; j++) {
-                    var current_entry = this.entriesByDay[day][j];
-                    if(current_entry.id == entryId) {
-                        this.entriesByDay[day].splice(i, 1);
-                    }
+        _removeEntryTags: function(entry) {
+            for(var i = 0; i < entry.tags.length; i++) {
+                var tag = entry.tags[i];
+                if(tag.length == 0) {
+                    continue;
+                }
+
+                this.allTags[tag].count--;
+
+                // remove the tag from the list if all entries associated with it have been removed
+                if(this.allTags[tag].count == 0) {
+                    delete this.allTags[tag];
+                }
+            }
+        },
+
+        _updateEntryTags: function(entry) {
+            this._removeEntryTags(entry);
+            this._addEntryTags(entry);
+        },
+
+        remove: function(entry) {
+            var day = moment(entry.timestamp).format(app.dateFormat);
+            var entries = this.entriesByDay[day];
+            for(var i = 0; i < entries.length; i++) {
+                var current_entry = entries[i];
+                if(current_entry.id == entry.id) {
+                    entries.splice(i, 1);
+                    this._removeEntryTags(entry);
                 }
             }
         },
 
         update: function(entryId, entry) {
-            var days = Object.keys(this.entriesByDay);
-
-            for(var i = 0; i < days.length; i++) {
-                var day = days[i];
-
-                for(var j = 0; j < this.entriesByDay[day].length; j++) {
-                    var current_entry = this.entriesByDay[day][j];
-                    if(current_entry.id == entryId) {
-                        this.entriesByDay[day][j] = entry;
-                    }
+            var day = moment(entry.timestamp).format(app.dateFormat);
+            var entries = this.entriesByDay[day];
+            for(var i = 0; i < entries.length; i++) {
+                var current_entry = entries[i];
+                if(current_entry.id == entry.id) {
+                    entries[i] = entry;
+                    this._updateEntryTags(entry);
                 }
             }
         }
@@ -230,10 +260,8 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
     };
 
     $scope.deleteEntry = function($resource) {
-        var entryId = this.entry.id;
-
-        EntryService.delete({id: entryId}, function(success) {
-            $scope.entryCollection.remove(entryId);
+        EntryService.delete({id: this.entry.id}, function(success) {
+            $scope.entryCollection.remove(this.entry);
         }, function(error) {
             // TODO(fsareshwala): fill me in
         });
