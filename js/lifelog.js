@@ -131,14 +131,10 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
             $scope.tagFilter = '';
         }
 
-        // always have an entry box for the last week
-        var day = moment();
-        for(var i = 0; i < 7; i++) {
-            var key = day.format(app.dateFormat);
-            $scope.entriesByDay[key] = [];
-            $scope.entriesList.push({day: key, entryList: $scope.entriesByDay[key]});
-            day.subtract('days', 1);
-        }
+        // always have an entry box for today
+        var today = moment().format(app.dateFormat);
+        $scope.entriesByDay[today] = [];
+        $scope.entriesList.push({day: today, entryList: $scope.entriesByDay[today]});
 
         var raw = func(params, function(success) {
             for(var i = 0; i < raw.length; i++) {
