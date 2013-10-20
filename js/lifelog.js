@@ -2,6 +2,12 @@ String.prototype.endsWith = function(suffix) {
     return this.indexOf(suffix, this.length - suffix.length) !== -1;
 };
 
+var didYouKnowList = [
+    "We have a [blog](http://blog.lifelog.io) where you can find out about the latest updates to the lifelog platform.",
+    "Lifelog has hashtags! Use them by prepending a word with the hash (#) symbol. Create subtags with slashes in between words (e.g. #work/social). Later, you can filter by hashtag.",
+];
+
+
 var app = angular.module('lifelog', ['ngResource']);
 app.dateFormat = 'dddd, MMMM D, YYYY';
 
@@ -88,13 +94,6 @@ app.filter('splitTag', function() {
     }
 });
 
-app.filter('randomArrayElement', function() {
-    return function(input) {
-        var rand = Math.floor(Math.random() * input.length);
-        return input[rand];
-    }
-});
-
 app.filter('sortEntries', function() {
     return function(input) {
         input.sort(function(left, right) {
@@ -119,6 +118,8 @@ app.factory('EntryService', function($resource) {
 
 app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
         EntryService, AccountService) {
+    $scope.didYouKnow = didYouKnowList[Math.floor(Math.random() * didYouKnowList.length)];
+
     $scope.entryCollection = {
         entriesByDay: {},
         entriesList: [],
@@ -197,10 +198,6 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
             }
         }
     };
-
-    $scope.didYouKnow = [
-        "We have a [blog](http://blog.lifelog.io) where you can find out about the latest updates to the lifelog platform.",
-    ];
 
     // always have an entry box for today
     var today = moment().format(app.dateFormat);
