@@ -145,6 +145,10 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
                     continue;
                 }
 
+                if(!(tag in this.allTags)) {
+                    continue;
+                }
+
                 this.allTags[tag].count--;
 
                 // remove the tag from the list if all entries associated with it have been removed
@@ -152,11 +156,6 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
                     delete this.allTags[tag];
                 }
             }
-        },
-
-        _updateEntryTags: function(entry) {
-            this._removeEntryTags(entry);
-            this._addEntryTags(entry);
         },
 
         remove: function(entry) {
@@ -178,7 +177,7 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
                 var current_entry = entries[i];
                 if(current_entry.id == entry.id) {
                     entries[i] = entry;
-                    this._updateEntryTags(entry);
+                    this._addEntryTags(entry);
                 }
             }
         }
@@ -247,6 +246,7 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
         var day = this.element.day;
         var entryId = this.entry.id;
 
+        $scope.entryCollection._removeEntryTags(this.entry);
         var entry = {
             id: this.entry.id,
             content: this.entry.original_content
