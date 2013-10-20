@@ -53,6 +53,14 @@ app.directive('markdown', function() {
     }
 });
 
+app.filter('markdown', function() {
+    var converter = new Showdown.converter();
+
+    return function(input) {
+        return converter.makeHtml(input);
+    }
+});
+
 app.filter('splitTag', function() {
     return function(input) {
         if(!input) {
@@ -77,6 +85,13 @@ app.filter('splitTag', function() {
         }
 
         return output;
+    }
+});
+
+app.filter('randomArrayElement', function() {
+    return function(input) {
+        var rand = Math.floor(Math.random() * input.length);
+        return input[rand];
     }
 });
 
@@ -182,6 +197,10 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
             }
         }
     };
+
+    $scope.didYouKnow = [
+        "We have a [blog](http://blog.lifelog.io) where you can find out about the latest updates to the lifelog platform.",
+    ];
 
     // always have an entry box for today
     var today = moment().format(app.dateFormat);
