@@ -88,6 +88,17 @@
                 <div class='panel-body'>
                 </div>
             </div>
+            <div class='panel panel-default'>
+                <div class='panel-heading'>
+                    Tags in View
+                </div>
+                <div class='panel-body'>
+                    <span class='label taglist' ng-repeat='(tag, null) in entryCollection.allTags'>
+                        <span ng-repeat='(href, value) in tag | splitTag'><span class='text-primary' ng-if='!$first'>/</span><a href='#/tag/{{ href }}'>{{ value }}</a></span>
+                    </span>
+                </div>
+            </div>
+            <!--
             <div class='panel panel-success'>
                 <div class='panel-heading'>
                     Did you know?
@@ -95,6 +106,7 @@
                 <div class='panel-body'>
                 </div>
             </div>
+            -->
         </div>
     </div>
 </div>

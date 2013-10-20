@@ -107,6 +107,7 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
     $scope.entryCollection = {
         entriesByDay: {},
         entriesList: [],
+        allTags: {},
 
         insert: function(entry) {
             var day = moment.utc(entry.timestamp).local().format(app.dateFormat);
@@ -117,14 +118,17 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
             }
 
             this.entriesByDay[day].push(entry);
+
+            for(var i = 0; i < entry.tags.length; i++) {
+                // angularjs doesn't allow duplicates in repeaters
+                this.allTags[entry.tags[i]] = entry.tags[i];
+            }
         },
 
         remove: function(entryId) {
             var days = Object.keys(this.entriesByDay);
-
             for(var i = 0; i < days.length; i++) {
                 var day = days[i];
-
                 for(var j = 0; j < this.entriesByDay[day].length; j++) {
                     var current_entry = this.entriesByDay[day][j];
                     if(current_entry.id == entryId) {
