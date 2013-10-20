@@ -26,52 +26,74 @@
         </ol>
     </div>
 
-    <div class='col-md-4' ng-repeat='element in entriesList | sortEntries'>
-        <div class='panel panel-primary'>
-            <div class='panel-heading'>
-                <span class='glyphicon glyphicon-calendar'></span>
-                {{ element.day }}
-            </div>
-            <div class='panel-body'>
-                <form ng-submit='addEntry()'>
-                    <div class='input-group'>
-                        <input type='text' placeholder='What did you do on this day?' ng-model='newContent' class='form-control input-sm' maxlength=140>
-                        <span class='input-group-btn'>
-                            <button class='btn btn-success input-sm' type='submit' ng-show='140 - newContent.length > 20'>
-                                <span class='glyphicon glyphicon-check'></span>
-                            </button>
-                            <button class='btn btn-warning input-sm' type='submit' ng-show='140 - newContent.length <= 20'>
-                                {{ 140 - newContent.length }}
-                            </button>
-                        </span>
-                    </div>
-                </form>
-            </div>
-            <ul class='list-group'>
-                <li class='list-group-item' ng-mouseenter='hovering=true' ng-mouseleave='hovering=false' ng-dblclick='editing=true' ng-repeat='entry in element.entryList'>
-                <div ng-show='editing'>
-                    <form ng-submit='editEntry(); editing=false'>
-                        <div class='input-group'>
-                            <input type='text' ng-model='entry.original_content' class='form-control input-sm' maxlength=140>
-                            <span class='input-group-btn'>
-                                <button class='btn btn-success input-sm' type='submit' ng-show='140 - entry.original_content.length > 20'>
-                                    <span class='glyphicon glyphicon-check'></span>
-                                </button>
-                                <button class='btn btn-warning input-sm' type='submit' ng-show='140 - entry.original_content.length <= 20'>
-                                    {{ 140 - entry.original_content.length }}
-                                </button>
-                            </span>
+    <div class='row'>
+        <div class='col-md-9'>
+            <div class='row'>
+                <div class='col-md-6' ng-repeat='element in entriesList | sortEntries'>
+                    <div class='panel panel-primary'>
+                        <div class='panel-heading'>
+                            <span class='glyphicon glyphicon-calendar'></span>
+                            {{ element.day }}
                         </div>
-                    </form>
+                        <div class='panel-body'>
+                            <form ng-submit='addEntry()'>
+                                <div class='input-group'>
+                                    <input type='text' placeholder='What did you do on this day?' ng-model='newContent' class='form-control input-sm' maxlength=140>
+                                    <span class='input-group-btn'>
+                                        <button class='btn btn-success input-sm' type='submit' ng-show='140 - newContent.length > 20'>
+                                            <span class='glyphicon glyphicon-check'></span>
+                                        </button>
+                                        <button class='btn btn-warning input-sm' type='submit' ng-show='140 - newContent.length <= 20'>
+                                            {{ 140 - newContent.length }}
+                                        </button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                        <ul class='list-group'>
+                            <li class='list-group-item' ng-mouseenter='hovering=true' ng-mouseleave='hovering=false' ng-dblclick='editing=true' ng-repeat='entry in element.entryList'>
+                            <div ng-show='editing'>
+                                <form ng-submit='editEntry(); editing=false'>
+                                    <div class='input-group'>
+                                        <input type='text' ng-model='entry.original_content' class='form-control input-sm' maxlength=140>
+                                        <span class='input-group-btn'>
+                                            <button class='btn btn-success input-sm' type='submit' ng-show='140 - entry.original_content.length > 20'>
+                                                <span class='glyphicon glyphicon-check'></span>
+                                            </button>
+                                            <button class='btn btn-warning input-sm' type='submit' ng-show='140 - entry.original_content.length <= 20'>
+                                                {{ 140 - entry.original_content.length }}
+                                            </button>
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
+                            <div ng-hide='editing'>
+                                <span>{{ entry.content }}</span>
+                                <span class='label' ng-repeat='tag in entry.tags'><span ng-repeat='(href, value) in tag | splitTag'><span class='text-primary' ng-if='!$first'>/</span><a href='#/tag/{{ href }}'>{{ value }}</a></span>
+                                </span>
+                                <button type='button' ng-show='hovering' ng-click='deleteEntry()' class='close pull-right'>&times;</button>
+                            </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div ng-hide='editing'>
-                    <span>{{ entry.content }}</span>
-                    <span class='label' ng-repeat='tag in entry.tags'><span ng-repeat='(href, value) in tag | splitTag'><span class='text-primary' ng-if='!$first'>/</span><a href='#/tag/{{ href }}'>{{ value }}</a></span>
-                    </span>
-                    <button type='button' ng-show='hovering' ng-click='deleteEntry()' class='close pull-right'>&times;</button>
+            </div>
+        </div>
+        <div class='col-md-3'>
+            <div class='panel panel-default'>
+                <div class='panel-heading'>
+                    {{ user.username }}
                 </div>
-                </li>
-            </ul>
+                <div class='panel-body'>
+                </div>
+            </div>
+            <div class='panel panel-success'>
+                <div class='panel-heading'>
+                    Did you know?
+                </div>
+                <div class='panel-body'>
+                </div>
+            </div>
         </div>
     </div>
 </div>
