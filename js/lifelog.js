@@ -4,7 +4,7 @@ String.prototype.endsWith = function(suffix) {
 
 var didYouKnowList = [
     "We have a [blog](http://blog.lifelog.io) where you can find out about the latest updates to the lifelog platform.",
-    "Lifelog has hashtags! Use them by prepending a word with the hash (#) symbol. Create subtags with slashes in between words (e.g. #work/social). Later, you can filter by hashtag.",
+    "Lifelog has hashtags! Use them by prepending a word with the hash (#) symbol. Create subtags with slashes in between words (#work/social). Later, you can filter by hashtag.",
     "If the command line is more your forte, lifelog has a [command line client](http://www.github.com/lifelog/lg) too.",
 ];
 
