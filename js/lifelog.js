@@ -120,11 +120,18 @@ app.factory('EntryService', function($resource) {
 app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
         EntryService, AccountService) {
     $scope.didYouKnow = didYouKnowList[Math.floor(Math.random() * didYouKnowList.length)];
+    $scope.page = 0;
 
     $scope.entryCollection = {
         entriesByDay: {},
         entriesList: [],
         allTags: {},
+
+        reset: function() {
+            this.entriesByDay = {};
+            this.entriesList = [];
+            this.allTags = {};
+        },
 
         insert: function(entry) {
             var day = moment.utc(entry.timestamp).local().format(app.dateFormat);
@@ -215,14 +222,17 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
             });
         }
 
+        $scope.entryCollection.reset();
+
         var func = EntryService.query;
-        var params = {};
+        var params = {page: $scope.page};
+
         if($routeParams.tag) {
             $scope.viewingTag = true;
             $scope.tagFilter = $routeParams.tag;
 
             func = EntryService.queryTag;
-            params = {tag:$routeParams.tag};
+            params.tag = $routeParams.tag;
         }
         else {
             $scope.viewingTag = false;
