@@ -83,7 +83,7 @@
         <div class='col-md-3'>
             <div class='panel panel-default'>
                 <div class='panel-heading'>
-                    Tags in View
+                    <span class='glyphicon glyphicon-tag'></span><span> Tags in View</span>
                 </div>
                 <div class='panel-body'>
                     <span class='label taglist' ng-repeat='(tag, count) in entryCollection.allTags'>
@@ -93,7 +93,7 @@
             </div>
             <div class='panel panel-success'>
                 <div class='panel-heading'>
-                    Did you know?
+                    <span class='glyphicon glyphicon-info-sign'></span><span> Did You Know?</span>
                 </div>
                 <div class='panel-body' ng-bind-html-unsafe='didYouKnow | markdown'></div>
             </div>
