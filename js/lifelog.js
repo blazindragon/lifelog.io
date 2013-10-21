@@ -131,6 +131,14 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
             this.entriesByDay = {};
             this.entriesList = [];
             this.allTags = {};
+
+            // always have an entry box for today
+            var today = moment().format(app.dateFormat);
+            this.entriesByDay[today] = [];
+            this.entriesList.push({
+                day: today,
+                entryList: $scope.entryCollection.entriesByDay[today]
+            });
         },
 
         insert: function(entry) {
@@ -206,11 +214,6 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
             }
         }
     };
-
-    // always have an entry box for today
-    var today = moment().format(app.dateFormat);
-    $scope.entryCollection.entriesByDay[today] = [];
-    $scope.entryCollection.entriesList.push({day: today, entryList: $scope.entryCollection.entriesByDay[today]});
 
     $scope.load = function($resource) {
         if(!$rootScope.loggedIn) {
