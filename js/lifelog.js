@@ -251,14 +251,10 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
         });
     };
 
-    $scope.addEntry = function($resource) {
-        if(!this.newContent) {
+    $scope.addEntry = function(day, content, $resource) {
+        if(!content) {
             return;
         }
-
-        var day = this.element.day;
-        var content = this.newContent;
-        this.newContent = '';
 
         var entry = {
             content: content,

@@ -36,7 +36,7 @@
                             {{ entryGroup.day }}
                         </div>
                         <div class='panel-body'>
-                            <form ng-submit='addEntry()'>
+                            <form ng-submit='addEntry(entryGroup.day, newContent); newContent=""'>
                                 <div class='input-group'>
                                     <input type='text' placeholder='What did you do on {{ entryGroup.day }}?' ng-model='newContent' class='form-control input-sm' maxlength=140>
                                     <span class='input-group-btn'>
