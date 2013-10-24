@@ -38,7 +38,7 @@
                         <div class='panel-body'>
                             <form ng-submit='addEntry()'>
                                 <div class='input-group'>
-                                    <input type='text' placeholder='What did you do on this day?' ng-model='newContent' class='form-control input-sm' maxlength=140>
+                                    <input type='text' placeholder='What did you do on {{ entryGroup.day }}?' ng-model='newContent' class='form-control input-sm' maxlength=140>
                                     <span class='input-group-btn'>
                                         <button class='btn btn-success input-sm' type='submit' ng-show='140 - newContent.length > 20'>
                                             <span class='glyphicon glyphicon-check'></span>
