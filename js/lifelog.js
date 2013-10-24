@@ -282,8 +282,7 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
         });
     };
 
-    $scope.deleteEntry = function($resource) {
-        var entry = this.entry;
+    $scope.deleteEntry = function(entry, $resource) {
         EntryService.delete({id: entry.id}, function(success) {
             $scope.entryCollection.remove(entry);
         }, function(error) {

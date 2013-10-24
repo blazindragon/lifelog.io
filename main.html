@@ -72,7 +72,7 @@
                                 <span class='label' ng-repeat='tag in entry.tags'>
                                     <span ng-repeat='(href, value) in tag | splitTag'><span class='text-primary' ng-if='!$first'>/</span><a href='#/tag/{{ href }}'>{{ value }}</a></span>
                                 </span>
-                                <button type='button' ng-show='hovering' ng-click='deleteEntry()' class='close pull-right'>&times;</button>
+                                <button type='button' ng-show='hovering' ng-click='deleteEntry(entry)' class='close pull-right'>&times;</button>
                             </div>
                             </li>
                         </ul>
