@@ -29,11 +29,11 @@
     <div class='row'>
         <div class='col-md-9'>
             <div class='row'>
-                <div class='col-md-6' ng-repeat='element in entryCollection.entriesList | sortEntries'>
+                <div class='col-md-6' ng-repeat='entryGroup in entryCollection.entriesList | sortEntries'>
                     <div class='panel panel-primary'>
                         <div class='panel-heading'>
                             <span class='glyphicon glyphicon-calendar'></span>
-                            {{ element.day }}
+                            {{ entryGroup.day }}
                         </div>
                         <div class='panel-body'>
                             <form ng-submit='addEntry()'>
@@ -51,7 +51,7 @@
                             </form>
                         </div>
                         <ul class='list-group'>
-                            <li class='list-group-item' ng-mouseenter='hovering=true' ng-mouseleave='hovering=false' ng-dblclick='editing=true' ng-repeat='entry in element.entryList'>
+                            <li class='list-group-item' ng-mouseenter='hovering=true' ng-mouseleave='hovering=false' ng-dblclick='editing=true' ng-repeat='entry in entryGroup.entryList'>
                             <div ng-show='editing'>
                                 <form ng-submit='editEntry(); editing=false'>
                                     <div class='input-group'>
