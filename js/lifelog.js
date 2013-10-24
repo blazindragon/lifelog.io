@@ -268,18 +268,15 @@ app.controller('EntryCtrl', function($scope, $rootScope, $routeParams,
         });
     };
 
-    $scope.editEntry = function($resource) {
-        var day = this.element.day;
-        var entryId = this.entry.id;
-
+    $scope.editEntry = function(entry, $resource) {
         $scope.entryCollection._removeEntryTags(this.entry);
         var entry = {
-            id: this.entry.id,
-            content: this.entry.original_content
+            id: entry.id,
+            content: entry.original_content
         };
 
         var response = EntryService.update(entry, function(success) {
-            $scope.entryCollection.update(entryId, response);
+            $scope.entryCollection.update(entry.id, response);
         }, function(error) {
             // TODO(fsareshwala): fill me in
         });

@@ -53,7 +53,7 @@
                         <ul class='list-group'>
                             <li class='list-group-item' ng-mouseenter='hovering=true' ng-mouseleave='hovering=false' ng-dblclick='editing=true' ng-repeat='entry in entryGroup.entryList'>
                             <div ng-show='editing'>
-                                <form ng-submit='editEntry(); editing=false'>
+                                <form ng-submit='editEntry(entry); editing=false'>
                                     <div class='input-group'>
                                         <input type='text' ng-model='entry.original_content' class='form-control input-sm' maxlength=140>
                                         <span class='input-group-btn'>
